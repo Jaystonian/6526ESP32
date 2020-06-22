@@ -1,0 +1,218 @@
+48742057140642
+CPU2
+6502CPU
+40-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils)
+6502 cpu 40 dip pdip 
+0
+40
+40
+CPU2
+AST-03208MR_Speaker
+
+
+0
+2
+2
+CPU2
+Audio_SJ1-3535NG
+
+
+0
+5
+5
+CPU2
+BUS_PCIexpress_TE
+PCIexpress Bus Edge Connector
+PCIexpress Bus Edge Connector
+0
+72
+36
+CPU2
+BUS_PCIexpress_TE_Card
+PCIexpress Bus Edge Connector
+PCIexpress Bus Edge Connector
+0
+72
+36
+CPU2
+C64_CASSETTEPORT
+Card edge connector 3.96mm pitch 2x12
+conn samtec card-edge high-speed
+0
+12
+12
+CPU2
+C64_EXPANSION_CARD_49mm
+
+
+0
+44
+44
+CPU2
+C64_EXPANSION_CARD_68mm
+
+
+0
+44
+44
+CPU2
+C64_EXPANSION_CARD_83mm
+
+
+0
+44
+44
+CPU2
+C64_EXPANSION_PORT
+Through hole angled pin header, 2x22, 2.54mm pitch, 6mm pin length, double rows
+Through hole angled pin header THT 2x22 2.54mm double row
+0
+44
+44
+CPU2
+C64_USERPORT
+Card edge connector 3.96mm pitch 2x12
+conn samtec card-edge high-speed
+0
+24
+24
+CPU2
+Connector_ATX
+
+
+0
+26
+24
+CPU2
+Conn_03x16
+
+
+0
+48
+48
+CPU2
+CVS-1508_Speaker
+
+
+0
+2
+2
+CPU2
+DIN-6-240
+
+
+0
+12
+6
+CPU2
+DIP-16_W7.62mm-DRAM4164L
+16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils)
+THT DIP DIL PDIP 2.54mm 7.62mm 300mil
+0
+9
+9
+CPU2
+DIP-16_W7.62mm-DRAM4164R
+16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils)
+THT DIP DIL PDIP 2.54mm 7.62mm 300mil
+0
+7
+7
+CPU2
+DIP-64_750
+
+
+0
+64
+64
+CPU2
+ESP32-DEV1
+Through hole straight socket strip, 2x18, 2.54mm pitch, double cols (from Kicad 4.0.7), script generated
+Through hole socket strip THT 2x18 2.54mm double row
+0
+36
+36
+CPU2
+LFCSP-6
+LFCSP 6pin Pitch 0.65mm
+LFCSP 6pin 2x2mm Pitch 0.65mm
+0
+7
+7
+CPU2
+RFM_C128
+Through hole straight pin header, 1x04, 2.54mm pitch, single row
+Through hole pin header THT 1x04 2.54mm single row
+0
+12
+8
+CPU2
+SolderWirePad_1x06_P3.81mm_Drill1.2mm
+Wire solder connection
+connector
+0
+6
+6
+CPU2
+SRAM-AS6C4008-32DIP
+32-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils)
+THT DIP DIL PDIP 2.54mm 15.24mm 600mil
+0
+32
+32
+CPU2
+SVIDEO_PORT_KMDGX-4S-BS
+
+
+0
+7
+4
+CPU2
+TO-3
+Transistor TO-3
+TR TO-3 TO3 TO-204
+0
+4
+3
+CPU2
+VideoOutHeader_1x03
+Through hole straight pin header, 1x03, 2.54mm pitch, single row
+Through hole pin header THT 1x03 2.54mm single row
+0
+3
+3
+CPU2
+W65C02CPU
+40-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils)
+6502 cpu 40 dip pdip 
+0
+40
+40
+CPU2
+W65C02CPU-44QFP
+44-Lead Plastic Quad Flatpack - 10x10x2.5mm Body (http://www.onsemi.com/pub/Collateral/122BK.PDF)
+PQFP 0.8
+0
+44
+44
+CPU2
+W65C816CPU
+40-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils)
+6502 cpu 40 dip pdip 
+0
+40
+40
+CPU2
+W65C816CPU-44QFP
+44-Lead Plastic Quad Flatpack - 10x10x2.5mm Body (http://www.onsemi.com/pub/Collateral/122BK.PDF)
+PQFP 0.8
+0
+44
+44
+CPU2
+XTAL_MODULE_DIP-24_W15.24mm
+24-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils), Socket
+THT DIP DIL PDIP 2.54mm 15.24mm 600mil Socket
+0
+16
+16
