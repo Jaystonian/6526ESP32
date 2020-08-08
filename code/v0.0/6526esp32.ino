@@ -4,6 +4,11 @@
     https://github.com/Jaystonian/6526ESP32
 
                             --- based on ---
+    
+   https://github.com/svenpetersen1965/C64-WiFi-Modem-User-Port    
+
+                            --- based on ---
+   https://1200baud.wordpress.com/2017/03/04/build-your-own-9600-baud-c64-wifi-modem-for-20/
 
    WiFi SIXFOUR - A virtual WiFi modem based on the ESP 8266 chipset
    Copyright (C) 2016 Paul Rickards <rickards@gmail.com>
