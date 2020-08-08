@@ -2,6 +2,9 @@
   6526ESP32 - A virtual WiFi modem and C64/C128 coprocessor 
     for MOS6526 & NodeMCU-32S (Commodore C64 & C128)
     https://github.com/Jaystonian/6526ESP32
+    
+    To use, follow instructions for StrikeLink WiFi or updated PDF specific to this project.
+    C64/C128 CCGMS available here: https://commodore.software/downloads/category/59-ccgms
 
                             --- based on ---
     
