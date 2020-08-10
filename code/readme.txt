@@ -1,5 +1,8 @@
-ver 0 - Basic conversion from original "juno12" and mid-state addition of functionality
-    Juno12.ino sourced from "alwyz modded firmware.rar" 20170303
+6526ESP32
 
-ver 0.1 - Timing and interfacing of data on IO1B (memory IO $DD80 to $DDFF)
- 
+v0.1 - Largely disabled wifi, device boots into Ready mode instead of Modem mode
+     - Added 1541diag (to use, poke 56704,5:poke 56705,0:sys56777)
+     - Intended to use a new version of BASIC with new commands to use the
+     device easily without pokes or sys calls, and also replace math etc.
+
+v0.0 - straight conversion from ESP8266, added a few things but very dirty
