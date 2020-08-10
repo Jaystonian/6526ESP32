@@ -1778,12 +1778,11 @@ void executeCommand()
   }
 }
 
-void transferBinary(const unsigned char *aBinary, uint nSize){
-  Serial.printf("Binary %d %d\r\n", nSize, aBinary[0]);
-}
-void triggerByteRead(byte nAddr)
-{
-  switch(cnMode){
+void transferBinary(const unsigned char *aBinary, uint nSize, byte nSysLSB, byte nSysMSB){
+  bool bUseSYSRESET = ((nSysLSB==0) && (nSysMSB==0));
+  byte nLSB=nSysLSB, nMSB=nSysMSB;
+  if(bUseSYSRESET){nLSB=(SYSRESET & 255);nMSB=(SYSRESET >> 8);}
+
   // To copy one byte:
   //73 = sys56777
   //73        75  76 77  78   79  80 81
@@ -1791,38 +1790,28 @@ void triggerByteRead(byte nAddr)
   //                          JMP $xxxx
   //A9 xx 8D xx xx 18 90 F8
   // each time it reads 78, either the byte for LDA is updated ***OR*** BCC is changed to JMP
+  
+  if(cnAddress==78){
+    ++cnByteCounter; ++cnByteDest;
+    if(cnByteCounter >= _1541diagcart_bin_size){
+      cnDataPage[74] = _1541diagcart_bin[cnByteCounter];
+      cnDataPage[76] = (cnByteDest & 255);
+      cnDataPage[77] = (cnByteDest >> 8); //cnByteDest / 256
+    }else{
+      //run the binary
+      cnDataPage[79] = 0x4c; //JMP
+      cnDataPage[80] = nLSB;
+      cnDataPage[81] = nMSB;
+    }
+  };
+}
+void triggerByteRead()
+{
+  switch(cnMode){
   case 5: //cartridge mode
     switch(cnCommand){
-    case 0: //1541diag
-    transferBinary(_1541diagcart_bin,_1541diagcart_bin_size);
-    
-    if(nAddr==78){
-      ++cnByteCounter; ++cnByteDest;
-      if(cnByteCounter >= _1541diagcart_bin_size){
-        cnDataPage[74] = _1541diagcart_bin[cnByteCounter];
-        cnDataPage[76] = (cnByteDest & 255);
-        cnDataPage[77] = (cnByteDest >> 8); //cnByteDest / 256
-      }else{
-        //run the binary
-        cnDataPage[79] = 0x4c; //JMP $8009
-        cnDataPage[80] = 0x09;
-        cnDataPage[81] = 0x80;
-      }
-    }; break;
-    case 1: //Tool-64
-    if(nAddr==78){
-      ++cnByteCounter; ++cnByteDest;
-      if(cnByteCounter >= tool64_bin_size){
-        cnDataPage[74] = tool64_bin[cnByteCounter];
-        cnDataPage[76] = (cnByteDest & 255);
-        cnDataPage[77] = (cnByteDest >> 8); //cnByteDest / 256
-      }else{
-        //run the binary
-        cnDataPage[79] = 0x4c; //JMP $8009
-        cnDataPage[80] = (SYSRESET & 255);
-        cnDataPage[81] = (SYSRESET >> 8);
-      }
-    }; break;
+    case 0: transferBinary(_1541diagcart_bin,_1541diagcart_bin_size, 0x09, 0x80); break;
+    case 1: transferBinary(_tool64_bin,_tool64_bin_size, 0, 0); break;
     default:;
     }; break;
   default:;
@@ -1851,23 +1840,24 @@ void loop()
   //if((cuRW_time<cuWaitRW))) return; //debug
 
   setDataRead(); //configure data bus for read/write
-  
-  byte nAddr = getByteAddress(); //6 bits, 0 to 127
+
+  cnAddress_OLD = cnAddress;
+  cnAddress = getByteAddress(); //6 bits, 0 to 127
   if(cbRW){ //read output
-    putByteData(cnDataPage[nAddr]);
-    triggerByteRead(nAddr);
+    putByteData(cnDataPage[cnAddress]);
+    triggerByteRead();
     
   }else{ //write input
     byte nByte = getByteData();
-    if(nAddr < 3) cnDataPage[nAddr] = nByte; // first three bytes will always be accepted for writing
-    if(nAddr==0 && cnMode != nByte){ //changing mode
+    if(cnAddress < 3) cnDataPage[cnAddress] = nByte; // first three bytes will always be accepted for writing
+    if(cnAddress==0 && cnMode != nByte){ //changing mode
       cnMode_old = cnMode;
       cnMode = nByte;
       if(cnMode_old==1 && cnMode==0) enableAddressing(true); //disables wifi
       prepareNewMode();
       return;
     }
-    if(nAddr==1 && cnCommand != nByte){ //new command
+    if(cnAddress==1 && cnCommand != nByte){ //new command
       cnCommand_old = cnCommand;
       cnCommand = nByte;
       executeCommand();
@@ -1877,11 +1867,11 @@ void loop()
     //legitimate writes
     bool bEnableWrite = false;
     switch(cnMode){
-      case 3: if(nAddr >= 7) bEnableWrite=true; break; //expression evaluator
-      case 4: if(nAddr < 72) bEnableWrite=true; break; //interactive menu
+      case 3: if(cnAddress >= 7) bEnableWrite=true; break; //expression evaluator
+      case 4: if(cnAddress < 72) bEnableWrite=true; break; //interactive menu
       default:;
     }
-    cnDataPage[nAddr] = nByte;
+    cnDataPage[cnAddress] = nByte;
     
     //writes are commands or storage of data, or prohibited by mode.
     //writing 0 to dd80 command byte will be the only way to break out of wifi mode, by returning to Ready mode.
